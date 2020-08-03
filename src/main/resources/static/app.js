@@ -13,7 +13,7 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('/api/v1/dispositivos');
+    var socket = new SockJS('wsocket-conector');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);

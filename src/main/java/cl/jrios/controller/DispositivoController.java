@@ -2,6 +2,8 @@ package cl.jrios.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cl.jrios.model.dto.DispositivoFormDto;
 import cl.jrios.model.dto.DispositivosDto;
+import cl.jrios.model.entity.Dispositivo;
+import cl.jrios.model.entity.DispositivoResponse;
 import cl.jrios.service.DispositivoService;
 
 @RestController
@@ -24,10 +28,14 @@ public class DispositivoController {
 	public DispositivosDto dispositivos(){
 		return servicio.obtenerTodos();
 	}
-	
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public DispositivosDto registrar(@RequestBody DispositivoFormDto dispositivoForm){
 		return servicio.registrar(dispositivoForm);
 	}
+	
+	
+
+
 }

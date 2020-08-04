@@ -1,6 +1,6 @@
 package cl.jrios.config;
 
-import java.util.Random;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +8,6 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import cl.jrios.model.entity.DispositivoResponse;
 import cl.jrios.service.DispositivoService;
 
 @EnableScheduling
@@ -20,16 +19,16 @@ public class SchedulerConfig {
     @Autowired
 	private DispositivoService servicio;
 
-    @Scheduled(fixedDelay = 1000)
+    @Scheduled(fixedDelay = 3000)
     public void sendAdhocMessages() {
-        Random rnd = new Random();
-        
-        Integer[] numeros = new Integer[10];
-        
-        for(int i = 0; i < 10; i ++) {
-            numeros[i] =  rnd.nextInt((10 - 0) + 1) + 0;
-        }
-        //Integer[] numeros = servicio.obtenerNumeros()
+//        Random rnd = new Random();
+//        
+//        Integer[] numeros = new Integer[10];
+//        
+//        for(int i = 0; i < 10; i ++) {
+//            numeros[i] =  rnd.nextInt((10 - 0) + 1) + 0;
+//        }
+        List<Integer> numeros = servicio.obtenerUltimos();
 
         template.convertAndSend("/agente/grafico", numeros);
     }
